@@ -1,48 +1,38 @@
-import Bloco
 from Bloco import FileSystem
 
-fs = FileSystem(20)  # Creates a file system with 20 blocks
-
-# Contiguous allocation
-fs.allocate_contiguous("file1.txt", 3)
-
-# Linked allocation
-fs.allocate_linked("file2.txt", 4)
-
-# Indexed allocation
-fs.allocate_indexed("file3.txt", 3)
-
-fs.display_disk_state()
-
-fs.delete_file("file1.txt")
-
-# Create a file system with 20 blocks
+#Cria um Sistema de arquivos (memória virtual) de 20 blocos
 fs = FileSystem(20)
 
-# Display initial state
-print("Initial state:")
-fs.display_disk_state()
+# Exibe o estado inicial do disco
+print("Estado Inicial:")
+fs.estadoDeDisco()
 
-# Test contiguous allocation
-print("\nAllocating file1.txt (contiguous, 3 blocks):")
-success, message = fs.allocate_contiguous("file1.txt", 3)
-print(message)
-fs.display_disk_state()
+# Testando alocação contígua
+print("\nAlocando arquivo1.txt (contíguo, 3 blocos):")
+sucesso, mensagemRetorno = fs.alocacaoContigua("arquivo1.txt", 3)
+print(mensagemRetorno)
+fs.estadoDeDisco()
 
-# Test linked allocation
-print("\nAllocating file2.txt (linked, 4 blocks):")
-success, message = fs.allocate_linked("file2.txt", 4)
-print(message)
-fs.display_disk_state()
+# Testa alocação encadeada
+print("\nAlocando arquivo2.txt (Encadeado, 4 blocos):")
+sucesso, mensagemRetorno = fs.alocacaoEncadeada("arquivo2.txt", 4)
+print(mensagemRetorno)
+fs.estadoDeDisco()
 
-# Test indexed allocation
-print("\nAllocating file3.txt (indexed, 3 blocks):")
-success, message = fs.allocate_indexed("file3.txt", 3)
-print(message)
-fs.display_disk_state()
+# Testa alocação indexada
+print("\nAlocando arquivo3.txt (indexado, 3 blocos):")
+sucesso, mensagemRetorno = fs.alocacaoIndexada("arquivo3.txt", 3)
+print(mensagemRetorno)
+fs.estadoDeDisco()
 
-# Test file deletion
-print("\nDeleting file1.txt:")
-success, message = fs.delete_file("file1.txt")
-print(message)
-fs.display_disk_state()
+# Testa exclusão de arquivo
+print("\nDeletando arquivo1.txt:")
+sucesso, mensagemRetorno = fs.deletaArquivo("arquivo1.txt")
+print(mensagemRetorno)
+fs.estadoDeDisco()
+
+# Aloca o arquivo4
+print("\nAlocando arquivo4.txt (Encadeado, 4 blocos):")
+sucesso, mensagemRetorno = fs.alocacaoEncadeada("arquivo4.txt", 4)
+print(mensagemRetorno)
+fs.estadoDeDisco()
