@@ -12,6 +12,9 @@ class FileSystem:
         self.tabelaDeArquivo = {}  # Armazena metadados de Arquivo
         self.blocosDeIndice = {}  # Para alocação indexada
 
+# Método para encontrar uma sequência contígua de blocos livres.
+# Retorna o índice do primeiro bloco da sequência ou -1 se não houver espaço suficiente.
+
     def encontraBlocosContiguos(self, tamanho):
 
        # Encontra blocos contíguos para alocação
@@ -29,6 +32,9 @@ class FileSystem:
                 contador = 0
         return -1
 
+# Método para alocar um arquivo de forma contígua.
+# Recebe o nome do arquivo e o tamanho (em blocos) como parâmetros.
+# Retorna uma tupla com um booleano (indicando sucesso ou falha) e uma 
     def alocacaoContigua(self, nomeArquivo, tamanho):
 
         # encontra blocos contíguos para alocação
@@ -46,6 +52,10 @@ class FileSystem:
             'tipo': 'contíguo'
         }
         return True, f"Arquivo alocado Contiguamente do bloco {blocoDeInicio} ao {blocoDeInicio + tamanho - 1}"
+
+# Método para alocar um arquivo usando alocação encadeada.
+# Recebe o nome do arquivo e o tamanho (em blocos) como parâmetros.
+# Retorna uma tupla com um booleano (indicando sucesso ou falha) e uma mensagem.
 
     def alocacaoEncadeada(self, nomeArquivo, tamanho):
        
@@ -74,6 +84,9 @@ class FileSystem:
         }
         return True, f"Arquivo alocado usando alocação Encadeada. Bloco de Inicio: {blocosLivres[0]}"
 
+# Método para alocar um arquivo usando alocação indexada.
+# Recebe o nome do arquivo e o tamanho (em blocos) como parâmetros.
+# Retorna uma tupla com um booleano (indicando sucesso ou falha) e uma mensagem.
     def alocacaoIndexada(self, nomeArquivo, tamanho):
         
         # Encontra um bloco para indices
@@ -115,7 +128,9 @@ class FileSystem:
 
     def deletaArquivo(self, nomeArquivo):
 
-        # Deleta um arquivo e libera seu Espaço no disco
+# Método para deletar um arquivo e liberar seu espaço no disco.
+# Recebe o nome do arquivo como parâmetro.
+# Retorna uma tupla com um booleano (indicando sucesso ou falha) e uma mensagem.
         if nomeArquivo not in self.tabelaDeArquivo:
             return False, "Arquivo não encontrado"
 
@@ -153,6 +168,10 @@ class FileSystem:
 
         del self.tabelaDeArquivo[nomeArquivo]
         return True, f"Arquivo {nomeArquivo} deletado com sucesso"
+
+
+# Método para exibir o estado atual do disco e a tabela de arquivos.
+# Mostra o status de cada bloco (ocupado ou livre) e os metadados dos arquivos.
 
     def estadoDeDisco(self):
         
